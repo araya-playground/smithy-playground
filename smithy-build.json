@@ -1,4 +1,17 @@
 {
   "version": "1.0",
-  "sources": ["model"]
+  "sources": ["model"],
+  "maven": {
+    "dependencies": [
+      "software.amazon.smithy:smithy-aws-traits:1.48.0",
+      "software.amazon.smithy:jsonschema:1.48.0"
+    ]
+  },
+  "plugins": {
+    "openapi": {
+      "service": "example.weather#Weather",
+      "version": "3.1.0",
+      "useJsonName": true
+    }
+  }
 }
