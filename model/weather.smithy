@@ -42,3 +42,43 @@ structure GetForecastOutput for Forecast {
 
 @pattern ("^[A-Za-z0-9 ]+$")
 string CityId
+
+@readonly
+operation GetCity {
+   input := for City {
+	@required
+	$cityId
+   } 
+
+   output := for City {
+	@required
+	@notProperty
+	name: String
+
+	@required
+	$coordinates
+   }
+
+   errors: [
+	NoSuchResource
+   ]
+}
+
+@readonly
+operation GetForecast {
+	input := for Forecast {
+		@required
+		$cityId
+	}
+
+	output ;= for Forecast {
+		$chanceOfRain
+	}
+}
+
+@error("client")
+structure NoSuchResource {
+	@required
+	resourceType: String
+}
+
